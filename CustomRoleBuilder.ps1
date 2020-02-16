@@ -58,7 +58,7 @@ $rolename = $role.name
 }
 
 # where is the XAML file?
-$xamlFile = "C:\Users\Josh\Documents\Dev\AzureRBACRoleBuilder\AzureRBACRoleBuilder\MainWindow.xaml"
+$xamlFile = #enter the filepath to where ever you saved the mainwindow.xaml file to
 
 #create window
 $inputXML = Get-Content $xamlFile -Raw
