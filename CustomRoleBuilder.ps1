@@ -58,7 +58,7 @@ $rolename = $role.name
 }
 
 # where is the XAML file?
-$xamlFile = #enter the filepath to where ever you saved the mainwindow.xaml file to
+$xamlFile = "C:\Users\Josh\Documents\Dev\AzureRBACRoleBuilder\AzureRBACRoleBuilder\MainWindow.xaml"
 
 #create window
 $inputXML = Get-Content $xamlFile -Raw
@@ -87,7 +87,7 @@ $xaml.SelectNodes("//*[@Name]") | ForEach-Object {
 }
 Get-Variable var_*
 
-
+$perms = Get-AzProviderOperation
 $var_Subscription.ItemsSource = (Get-AzSubscription).Name
 
 $var_Subscription.Add_SelectionChanged( {
@@ -99,17 +99,15 @@ $var_Subscription.Add_SelectionChanged( {
    $var_statusout.text="Subscription changed to $subscription"
    })
 
-$var_ProviderType.ItemsSource = (get-azprovideroperation | select -Unique providernamespace | Where-Object providernamespace -Like "Microsoft*" | sort providernamespace).providernamespace
+$var_ProviderType.ItemsSource = ($perms | select -Unique providernamespace | Where-Object providernamespace -Like "Microsoft*" | sort providernamespace).providernamespace
 
 $var_ProviderType.Add_SelectionChanged( {
    #clear the result box
    $var_statusout.text="Updating Provider list..."
    $var_AvailablePerms.Items.Clear()
    $ProviderSelection = $var_ProviderType.SelectedItem
-   $availableperms = (Get-AzProviderOperation | where providernamespace -EQ $ProviderSelection).Operation
-        foreach ($perm in $availableperms) {
-        $var_AvailablePerms.Items.Add("$perm")   
-             }
+   $availableperms = ($perms | ? {($_.providernamespace -match "$($var_ProviderType.SelectedItem)")}).Operation
+   $var_AvailablePerms.ItemsSource = $availableperms
    $var_statusout.text="Provider type changed to $ProviderSelection"
    })
 
@@ -129,6 +127,12 @@ $var_Remove.Add_Click( {
 
  
    })
+
+$var_Searchbox.Add_TextChanged( {
+        $searchstring = $var_Searchbox.Text
+        $var_AvailablePerms.ItemsSource = ($perms | ? {($_.Operation -like "*$searchstring*") -and ($_.providernamespace -match "$($var_ProviderType.SelectedItem)")}).Operation
+   })
+
 
 $var_Clear.Add_Click( {
         $var_SelectedPerms.Items.Clear() 
