@@ -15,7 +15,7 @@
         <ComboBox Name="ProviderType" HorizontalAlignment="Left" Margin="47,244,0,0" VerticalAlignment="Top" Width="223" Height="25" Grid.ColumnSpan="2"/>
         <ListBox Name="SelectedPerms" HorizontalAlignment="Left" Height="227" Margin="291,330,0,0" VerticalAlignment="Top" Width="306" Grid.Column="1"/>
         <Label Content="Choose Resource Type" HorizontalAlignment="Left" Margin="47,213,0,0" VerticalAlignment="Top" Width="143" Height="26" Grid.ColumnSpan="2"/>
-        <Label Content="Choose Permission to add it to the list" HorizontalAlignment="Left" Margin="47,294,0,0" VerticalAlignment="Top" Width="292" Height="26" Grid.ColumnSpan="2"/>
+        <Label Content="Choose Permission to add it to the list" HorizontalAlignment="Left" Margin="47,274,0,0" VerticalAlignment="Top" Width="292" Height="26" Grid.ColumnSpan="2"/>
         <Label Content="Current list of desired permissions:" HorizontalAlignment="Left" Margin="385,294,0,0" VerticalAlignment="Top" Width="212" Height="26" Grid.Column="1"/>
         <Button Name="Build" Content="Build" HorizontalAlignment="Left" Margin="534,579,0,0" VerticalAlignment="Top" Width="77" Height="20" Grid.Column="1"/>
         <Button Name="Add" Content="Add" HorizontalAlignment="Left" Margin="208,411,0,0" VerticalAlignment="Top" Width="77" Height="21" Grid.Column="1"/>
@@ -32,6 +32,8 @@
         <TextBox Name="Description" HorizontalAlignment="Left" Height="23" Margin="34,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="326" Grid.Column="1"/>
         <TextBlock Name="Statusout" Grid.Column="1" HorizontalAlignment="Left" Margin="50,583,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
         <Label Content="Status:" Grid.Column="1" HorizontalAlignment="Left" Margin="0,578,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="Searchbox" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" Margin="113,300,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="226"/>
+        <Label Content="Search:" HorizontalAlignment="Left" Margin="56,298,0,0" VerticalAlignment="Top" Width="52"/>
 
     </Grid>
 </Window>
