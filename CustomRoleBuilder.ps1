@@ -57,8 +57,11 @@ $var_SelectedPerms.Items.Clear()
 $rolename = $role.name
 }
 
+set-azlogincontext
+
 # where is the XAML file?
-$xamlFile = "C:\Users\Josh\Documents\Dev\AzureRBACRoleBuilder\AzureRBACRoleBuilder\MainWindow.xaml"
+wget https://raw.githubusercontent.com/joshfranzen/AzureRBACRoleCreatorGUI/master/MainWindow.xaml -OutFile MainWindow.xaml
+$xamlFile = "MainWindow.xaml"
 
 #create window
 $inputXML = Get-Content $xamlFile -Raw
@@ -104,7 +107,7 @@ $var_ProviderType.ItemsSource = ($perms | select -Unique providernamespace | Whe
 $var_ProviderType.Add_SelectionChanged( {
    #clear the result box
    $var_statusout.text="Updating Provider list..."
-   $var_AvailablePerms.Items.Clear()
+   
    $ProviderSelection = $var_ProviderType.SelectedItem
    $availableperms = ($perms | ? {($_.providernamespace -match "$($var_ProviderType.SelectedItem)")}).Operation
    $var_AvailablePerms.ItemsSource = $availableperms
@@ -130,9 +133,10 @@ $var_Remove.Add_Click( {
 
 $var_Searchbox.Add_TextChanged( {
         $searchstring = $var_Searchbox.Text
-        $var_AvailablePerms.ItemsSource = ($perms | ? {($_.Operation -like "*$searchstring*") -and ($_.providernamespace -match "$($var_ProviderType.SelectedItem)")}).Operation
+        [ARRAY]$availableperms = ($perms | ? {($_.Operation -like "*$searchstring*") -and ($_.providernamespace -match "$($var_ProviderType.SelectedItem)")}).Operation
+        $var_AvailablePerms.ItemsSource = $availableperms
    })
-
+   
 
 $var_Clear.Add_Click( {
         $var_SelectedPerms.Items.Clear() 
