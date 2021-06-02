@@ -1,3 +1,6 @@
+#Update
+This tool is pretty much superceded by the addition of the custom role builder in the azure portal. As such, I will not be improving this tool.
+
 # AzureRBACRoleCreatorGUI
 A Powershell program with a XAML interface to create custom roles
 
